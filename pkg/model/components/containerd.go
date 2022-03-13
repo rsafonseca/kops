@@ -48,8 +48,10 @@ func (b *ContainerdOptionsBuilder) BuildOptions(o interface{}) error {
 		if fi.StringValue(containerd.Version) == "" {
 			if b.IsKubernetesGTE("1.23") {
 				containerd.Version = fi.String("1.6.1")
+			} else if b.IsKubernetesGTE("1.20") {
+				containerd.Version = fi.String("1.5.10")
 			} else {
-				containerd.Version = fi.String("1.4.12")
+				containerd.Version = fi.String("1.4.13")
 			}
 		}
 		// Set default log level to INFO
